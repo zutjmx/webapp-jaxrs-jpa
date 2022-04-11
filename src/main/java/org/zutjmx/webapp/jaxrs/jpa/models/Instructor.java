@@ -1,6 +1,10 @@
 package org.zutjmx.webapp.jaxrs.jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "instructores")
@@ -13,6 +17,22 @@ public class Instructor {
     private String nombre;
 
     private String apellido;
+
+    @JsonIgnoreProperties({"instructor","handler","hibernateLazyInitializer"})
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
+    private List<Curso> cursos;
+
+    public Instructor() {
+        this.cursos = new ArrayList<>();
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
 
     public Long getId() {
         return id;

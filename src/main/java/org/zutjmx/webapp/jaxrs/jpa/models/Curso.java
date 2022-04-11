@@ -1,10 +1,11 @@
 package org.zutjmx.webapp.jaxrs.jpa.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.json.bind.annotation.JsonbTransient;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+//import jakarta.json.bind.annotation.JsonbTransient;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlTransient;
+//import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @Entity
@@ -22,6 +23,7 @@ public class Curso {
     //@XmlTransient
     //@JsonbTransient
     //@JsonIgnore
+    @JsonIgnoreProperties({"cursos","handler","hibernateLazyInitializer"})
     @ManyToOne(fetch = FetchType.LAZY)
     private Instructor instructor;
 
